@@ -42,41 +42,53 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 <h2>Deployment and Configuration Steps</h2>
 
-Phase 1: Install and Configure Active Directory Domain Services
+🔹Phase 1: Install and Configure Active Directory Domain Services
 
-✅ Step 1: Install AD DS on Your Domain Controller
-Log into your Windows Server (future DC)
+✅Step 1: Install AD DS on Your Domain Controller
 
-Open Server Manager → Add roles and features
+- Log into your Windows Server (future DC)
 
-Install Active Directory Domain Services (AD DS)
+- Open Server Manager → Add roles and features
 
-✅ Step 2: Promote the Server to a Domain Controller
-After installation, click “Promote this server to a domain controller”
+- Install Active Directory Domain Services (AD DS)
 
-Select Add a new forest
+<img width="786" height="559" alt="Screenshot 2025-07-22 at 1 30 51 PM" src="https://github.com/user-attachments/assets/52214dee-3451-47b4-8d22-a7110a34a4e6" />
+<img width="784" height="557" alt="Screenshot 2025-07-22 at 1 35 57 PM" src="https://github.com/user-attachments/assets/329fe07e-0d6c-467f-be55-940c9f33fb2a" />
 
-Enter your root domain name (e.g., yourcompany.local)
+✅Step 2: Promote the Server to a Domain Controller
 
-Set a DSRM password
+- After installation, click “Promote this server to a domain controller”
 
-Complete the wizard and restart
+- Select Add a new forest
+
+- Enter your root domain name (e.g., yourcompany.local)
+
+- Set a DSRM password
+
+- Complete the wizard and restart
+
+<img width="759" height="559" alt="Screenshot 2025-07-22 at 1 54 33 PM" src="https://github.com/user-attachments/assets/c21b530a-7530-4eab-a338-36db697c7cca" />
 
 ✅ Step 3: Log In to the Domain
-After reboot, log in using:
+
+- After reboot, log in using:
+
 yourdomain\Administrator or the account you promoted
 
 🔹 Phase 2: Set Up Organizational Units and Admin Users
 ✅ Step 4: Create Organizational Units (OUs)
 Open Active Directory Users and Computers (ADUC)
 
-Create the following OUs:
+Create the following OUs by right clicking the domain:
 
 _EMPLOYEES
 
 _ADMINS
 
 _CLIENTS
+
+
+<img width="753" height="532" alt="Screenshot 2025-07-22 at 2 51 32 PM" src="https://github.com/user-attachments/assets/a03957dd-838b-4c18-9744-fca8ac74b685" />
 
 ✅ Step 5: Create an Admin Account
 In _ADMINS, create a user:
@@ -86,30 +98,43 @@ Name: Jane Doe
 Username: jane_admin
 
 Password: Cyberlab123! (or your own)
+<img width="750" height="531" alt="Screenshot 2025-07-22 at 2 55 46 PM" src="https://github.com/user-attachments/assets/d75209d6-738c-4af1-b2a0-f9dbf342693c" />
 
-Add this user to the Domain Admins security group
+Add this user to the Domain Admins security group by going to the users properties
+<img width="412" height="538" alt="Screenshot 2025-07-22 at 2 58 23 PM" src="https://github.com/user-attachments/assets/669bafc0-0027-4d51-abed-3815e0bd246a" />
+<img width="457" height="252" alt="Screenshot 2025-07-22 at 2 58 43 PM" src="https://github.com/user-attachments/assets/fc641058-515e-44b4-9c28-f186d1017436" />
 
 Log out and back in as:
-yourdomain\jane_admin
+yourdomain.com\jane
+
+
 
 🧠 From now on, perform all admin tasks using this account.
 
 🔹 Phase 3: Join Client Machines to the Domain
+
 ✅ Step 6: Prepare DNS and Network Settings
+
 On your client machine:
 
 Set the Preferred DNS Server to the Domain Controller’s IP
 
 Restart the client to apply settings
 
+(Recommended to do through azure for labs)
+
 ✅ Step 7: Join the Client to the Domain
 Log in as local admin
 
-Right-click This PC → Properties → Change settings
+System → About → Rename this PC
+
+<img width="1391" height="800" alt="Screenshot 2025-07-22 at 3 17 17 PM" src="https://github.com/user-attachments/assets/89404c6b-a660-4921-b297-ecd04b6cfc03" />
 
 Click Change... → Select “Domain” and enter: yourdomain.local
 
 Authenticate using domain admin credentials (e.g., jane_admin)
+
+<img width="1385" height="798" alt="Screenshot 2025-07-22 at 3 18 27 PM" src="https://github.com/user-attachments/assets/e20bab36-99d2-4fa6-9de1-25260f192e4e" />
 
 Restart after joining
 
@@ -120,7 +145,7 @@ Open ADUC
 
 Locate the new computer object (usually under Computers)
 
-Drag it into the _CLIENTS OU
+Drag it into the _CLIENTS OU (Optional)
 
 🔹 Phase 4: Enable RDP Access for Domain Users
 ✅ Step 9: Allow Remote Desktop for Domain Users
@@ -130,7 +155,12 @@ Open:
 
 System Properties → Remote Desktop
 
+<img width="1389" height="798" alt="Screenshot 2025-07-22 at 3 44 44 PM" src="https://github.com/user-attachments/assets/0c939294-f5d0-422b-8cd0-b3b9bd402cf5" />
+
 Click Select Users → Add → Domain Users
+
+
+<img width="374" height="333" alt="Screenshot 2025-07-22 at 3 45 24 PM" src="https://github.com/user-attachments/assets/04b8fb36-a779-4957-97a6-5b33def3ddda" />
 
 🔐 Best practice: Do this with Group Policy if managing many systems.
 
@@ -155,8 +185,7 @@ Log out
 Attempt to log in with:
 yourdomain\user1
 
-Use the password defined in your script
+Use the password defined in the script
 
-✅ You’ve now confirmed domain authentication and remote access.
 
 
