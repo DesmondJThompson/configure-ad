@@ -76,10 +76,12 @@ This tutorial outlines the implementation of on-premises Active Directory within
 yourdomain\Administrator or the account you promoted
 
 🔹 Phase 2: Set Up Organizational Units and Admin Users
-✅ Step 4: Create Organizational Units (OUs)
-Open Active Directory Users and Computers (ADUC)
 
-Create the following OUs by right clicking the domain:
+✅ Step 4: Create Organizational Units (OUs)
+
+- Open Active Directory Users and Computers (ADUC)
+
+- Create the following OUs by right clicking the domain:
 
 _EMPLOYEES
 
@@ -93,11 +95,12 @@ _CLIENTS
 ✅ Step 5: Create an Admin Account
 In _ADMINS, create a user:
 
-Name: Jane Doe
+Name: (your own)
 
-Username: jane_admin
+Username: (your own)
 
-Password: Cyberlab123! (or your own)
+Password: (your own)
+
 <img width="750" height="531" alt="Screenshot 2025-07-22 at 2 55 46 PM" src="https://github.com/user-attachments/assets/d75209d6-738c-4af1-b2a0-f9dbf342693c" />
 
 Add this user to the Domain Admins security group by going to the users properties
@@ -115,11 +118,11 @@ yourdomain.com\jane
 
 ✅ Step 6: Prepare DNS and Network Settings
 
-On your client machine:
+- On your client machine:
 
-Set the Preferred DNS Server to the Domain Controller’s IP
+- Set the Preferred DNS Server to the Domain Controller’s IP
 
-Restart the client to apply settings
+- Restart the client to apply settings
 
 (Recommended to do through azure for labs)
 
@@ -132,7 +135,7 @@ System → About → Rename this PC
 
 Click Change... → Select “Domain” and enter: yourdomain.local
 
-Authenticate using domain admin credentials (e.g., jane_admin)
+- Authenticate using domain admin credentials (e.g., jane_admin)
 
 <img width="1385" height="798" alt="Screenshot 2025-07-22 at 3 18 27 PM" src="https://github.com/user-attachments/assets/e20bab36-99d2-4fa6-9de1-25260f192e4e" />
 
@@ -141,15 +144,16 @@ Restart after joining
 ✅ Step 8: Verify the Join in ADUC
 On the Domain Controller:
 
-Open ADUC
+- Open ADUC
 
-Locate the new computer object (usually under Computers)
+- Locate the new computer object (usually under Computers)
 
-Drag it into the _CLIENTS OU (Optional)
+- Drag it into the _CLIENTS OU (Optional)
 
 🔹 Phase 4: Enable RDP Access for Domain Users
 ✅ Step 9: Allow Remote Desktop for Domain Users
-Log into the client as yourdomain\jane_admin
+
+- Log into the client as yourdomain\jane_admin
 
 Open:
 
